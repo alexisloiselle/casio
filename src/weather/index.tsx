@@ -61,7 +61,7 @@ const Weather: React.FunctionComponent<IProps> = ({ style }) => {
         ...style,
       }}
     >
-      <Text style={{ fontFamily: "digi", fontSize: 72 }}>
+      <Text style={{ fontFamily: "casio", fontSize: 72 }}>
         {typeof currentWeather?.temp === "number" &&
           Math.round(currentWeather?.temp)}
       </Text>
@@ -69,7 +69,7 @@ const Weather: React.FunctionComponent<IProps> = ({ style }) => {
         <View key={day.dt} style={{ alignItems: "center" }}>
           <Text
             style={{
-              fontFamily: "digi",
+              fontFamily: "casio",
               fontSize: 32,
             }}
           >
@@ -79,7 +79,7 @@ const Weather: React.FunctionComponent<IProps> = ({ style }) => {
             key={index}
             style={{
               marginTop: 8,
-              fontFamily: "digi",
+              fontFamily: "casio",
               fontSize: 32,
             }}
           >

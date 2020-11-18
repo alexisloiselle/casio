@@ -8,10 +8,7 @@ import Weather from "./src/weather";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
-    digi: require("./assets/fonts/casio.ttf"),
-    "digi-b": require("./assets/fonts/digib.ttf"),
-    "digi-i": require("./assets/fonts/digii.ttf"),
-    "digi-t": require("./assets/fonts/digit.ttf"),
+    casio: require("./assets/fonts/casio.ttf"),
   });
 
   if (!fontsLoaded) {

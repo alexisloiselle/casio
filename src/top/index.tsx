@@ -19,7 +19,7 @@ const Top: React.FunctionComponent<IProps> = ({ style }) => {
       <View style={{ flexDirection: "row", marginBottom: 16 }}>
         <Text
           style={{
-            fontFamily: "digi",
+            fontFamily: "casio",
             fontSize: 36,
             flex: 1,
             textAlign: "right",
@@ -29,7 +29,7 @@ const Top: React.FunctionComponent<IProps> = ({ style }) => {
         </Text>
         <Text
           style={{
-            fontFamily: "digi",
+            fontFamily: "casio",
             fontSize: 36,
             flex: 1,
             textAlign: "right",
@@ -39,10 +39,10 @@ const Top: React.FunctionComponent<IProps> = ({ style }) => {
         </Text>
       </View>
       <View style={{ flexDirection: "row", alignItems: "baseline" }}>
-        <Text style={{ fontSize: 104, fontFamily: "digi", marginRight: 4 }}>
+        <Text style={{ fontSize: 104, fontFamily: "casio", marginRight: 4 }}>
           {moment(time).format("HH:mm")}
         </Text>
-        <Text style={{ fontSize: 72, fontFamily: "digi" }}>
+        <Text style={{ fontSize: 72, fontFamily: "casio" }}>
           {moment(time).format("ss")}
         </Text>
       </View>
