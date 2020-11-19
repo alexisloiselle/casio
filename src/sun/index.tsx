@@ -3,6 +3,7 @@ import React from "react";
 import { Image, View, StyleSheet } from "react-native";
 import { Text } from "../components/Text";
 import { useWeather } from "../contexts/app";
+import colors from "../shared/colors";
 
 interface IProps {}
 
@@ -47,6 +48,7 @@ const styles = StyleSheet.create({
     height: 8,
     aspectRatio: 479 / 850,
     marginRight: 4,
+    tintColor: colors.textColor,
   },
   time: { fontSize: 24 },
 });

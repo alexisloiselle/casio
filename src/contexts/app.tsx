@@ -1,9 +1,7 @@
 import React, { useContext } from "react";
 import * as Location from "expo-location";
 import Axios from "axios";
-import Constants from "expo-constants";
-
-const API_KEY = Constants.manifest.extra.openWeatherApiKey;
+import { OPEN_WEATHER_API_KEY } from "@env";
 
 export type AppContextType = {
   location: {
@@ -77,7 +75,7 @@ export const AppProvider: React.FunctionComponent<IProps> = ({ children }) => {
       try {
         const response = await Axios.request({
           method: "GET",
-          url: `https://api.openweathermap.org/data/2.5/onecall?lat=${location.object?.coords.latitude}&lon=${location.object?.coords.longitude}&units=metric&appid=${API_KEY}`,
+          url: `https://api.openweathermap.org/data/2.5/onecall?lat=${location.object?.coords.latitude}&lon=${location.object?.coords.longitude}&units=metric&appid=${OPEN_WEATHER_API_KEY}`,
         });
         setWeather({ ...response.data, loading: false });
       } catch (e) {
