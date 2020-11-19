@@ -19,6 +19,7 @@ export default {
     supportsTablet: true,
   },
   android: {
+    package: 'com.alexisloiselle.casio',
     adaptiveIcon: {
       foregroundImage: "./assets/adaptive-icon.png",
       backgroundColor: "#FFFFFF",

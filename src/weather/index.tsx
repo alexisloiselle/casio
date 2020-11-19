@@ -1,94 +1,90 @@
-import Axios from "axios";
 import React from "react";
-import { ActivityIndicator, Text, View, ViewStyle } from "react-native";
-import * as Location from "expo-location";
-import Constants from "expo-constants";
+import { ActivityIndicator, StyleSheet, View, ViewStyle } from "react-native";
 import moment from "moment";
-
-const API_KEY = Constants.manifest.extra.openWeatherApiKey;
+import { Text } from "../components/Text";
+import { Sun } from "../sun";
+import { Wrapper } from "../wrapper";
+import { useWeather } from "../contexts/app";
 
 interface IProps {
   style?: ViewStyle;
 }
 
-const Weather: React.FunctionComponent<IProps> = ({ style }) => {
-  const [
-    location,
-    setLocation,
-  ] = React.useState<Location.LocationObject | null>(null);
-  const [loading, setLoading] = React.useState(true);
-  const [currentWeather, setCurrentWeather] = React.useState<any>(undefined);
-  const [forecast, setForecast] = React.useState<any[]>([]);
+export const Weather: React.FunctionComponent<IProps> = ({ style }) => {
+  const { loading, current, daily } = useWeather();
 
-  React.useEffect(() => {
-    (async () => {
-      await Location.requestPermissionsAsync();
-      const location = await Location.getCurrentPositionAsync({});
-      setLocation(location);
-    })();
-  }, []);
-
-  React.useEffect(() => {
-    if (!location) return;
-
-    const fetchWeather = async () => {
-      try {
-        const response = await Axios.request({
-          method: "GET",
-          url: `https://api.openweathermap.org/data/2.5/onecall?lat=${location.coords.latitude}&lon=${location.coords.longitude}&units=metric&appid=${API_KEY}`,
-        });
-        setCurrentWeather(response?.data?.current);
-        setForecast(response?.data?.daily);
-      } catch (e) {
-        console.log(e);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchWeather();
-  }, [location]);
-
-  return loading ? (
-    <ActivityIndicator color="#000" size={72} />
-  ) : (
-    <View
-      style={{
-        flexDirection: "row",
-        alignItems: "flex-end",
-        justifyContent: "space-between",
-        width: "100%",
-        ...style,
-      }}
-    >
-      <Text style={{ fontFamily: "casio", fontSize: 72 }}>
-        {typeof currentWeather?.temp === "number" &&
-          Math.round(currentWeather?.temp)}
-      </Text>
-      {forecast?.slice(0, 4)?.map((day, index) => (
-        <View key={day.dt} style={{ alignItems: "center" }}>
-          <Text
-            style={{
-              fontFamily: "casio",
-              fontSize: 32,
-            }}
-          >
-            {moment.unix(day?.dt).format("dddd").substring(0, 2).toUpperCase()}
-          </Text>
-          <Text
-            key={index}
-            style={{
-              marginTop: 8,
-              fontFamily: "casio",
-              fontSize: 32,
-            }}
-          >
-            {typeof day?.temp?.day === "number" && Math.round(day?.temp?.day)}
-          </Text>
-        </View>
-      ))}
-    </View>
+  return (
+    <Wrapper>
+      <View style={styles.container}>
+        {loading ? (
+          <ActivityIndicator color="#000" size={72} />
+        ) : (
+          <>
+            <View style={[styles.contentWrapper, style]}>
+              <View style={styles.row}>
+                <Text style={styles.currentWeather}>
+                  {typeof current?.temp === "number" &&
+                    Math.round(current?.temp)}
+                </Text>
+                <Text style={styles.font24}>
+                  {typeof current?.temp === "number" &&
+                    Math.round(current?.feels_like)}
+                </Text>
+              </View>
+              {daily?.slice(0, 4)?.map((day) => (
+                <View key={day.dt} style={styles.dailyWrapper}>
+                  <Text style={styles.font32}>
+                    {moment
+                      .unix(day?.dt)
+                      .format("dddd")
+                      .substring(0, 2)
+                      .toUpperCase()}
+                  </Text>
+                  <View style={styles.row}>
+                    <Text style={styles.dayTemp}>
+                      {typeof day?.temp?.day === "number" &&
+                        Math.round(day?.temp?.day)}
+                    </Text>
+                    <Text style={styles.dayFeels}>
+                      {typeof day?.temp?.day === "number" &&
+                        Math.round(day?.feels_like?.day)}
+                    </Text>
+                  </View>
+                </View>
+              ))}
+            </View>
+            <Sun />
+          </>
+        )}
+      </View>
+    </Wrapper>
   );
 };
 
-export default Weather;
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "#979F91",
+    padding: 24,
+    borderRadius: 12,
+    height: 130.7,
+  },
+  contentWrapper: {
+    flexDirection: "row",
+    alignItems: "flex-end",
+    justifyContent: "space-between",
+  },
+  row: { flexDirection: "row" },
+  currentWeather: { fontSize: 72, marginRight: 4 },
+  font24: { fontSize: 24 },
+  dailyWrapper: { alignItems: "center" },
+  font32: { fontSize: 32 },
+  dayTemp: {
+    marginTop: 8,
+    fontSize: 32,
+    marginRight: 4,
+  },
+  dayFeels: {
+    marginTop: 8,
+    fontSize: 16,
+  },
+});

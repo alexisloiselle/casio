@@ -2,9 +2,12 @@ import { AppLoading } from "expo";
 import { useFonts } from "expo-font";
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { Platform, SafeAreaView, StyleSheet, View } from "react-native";
-import Top from "./src/top";
-import Weather from "./src/weather";
+import { SafeAreaView, StyleSheet } from "react-native";
+import { AppProvider } from "./src/contexts/app";
+import { Ip } from "./src/ip";
+import { Location } from "./src/location";
+import { Top } from "./src/top";
+import { Weather } from "./src/weather";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -16,21 +19,25 @@ export default function App() {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar style="auto" backgroundColor="#979F91" />
-      <Top style={{ marginBottom: 32 }} />
-      <Weather />
-    </SafeAreaView>
+    <AppProvider>
+      <SafeAreaView style={styles.container}>
+        <StatusBar style="light" backgroundColor="#000" />
+        <Top />
+        <Weather />
+        <Ip />
+        <Location />
+      </SafeAreaView>
+    </AppProvider>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#979F91",
+    backgroundColor: "#000",
     alignItems: "flex-start",
     justifyContent: "flex-start",
     paddingTop: 48,
-    paddingHorizontal: 24,
+    paddingHorizontal: 8,
   },
 });
