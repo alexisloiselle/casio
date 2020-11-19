@@ -17,9 +17,10 @@ export default {
   assetBundlePatterns: ["**/*"],
   ios: {
     supportsTablet: true,
+    bundleIdentifier: "com.alexisloiselle.casio",
   },
   android: {
-    package: 'com.alexisloiselle.casio',
+    package: "com.alexisloiselle.casio",
     adaptiveIcon: {
       foregroundImage: "./assets/adaptive-icon.png",
       backgroundColor: "#FFFFFF",
