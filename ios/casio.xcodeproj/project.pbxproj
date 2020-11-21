@@ -311,7 +311,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.alexisloiselle.casio";
-				PRODUCT_NAME = casio;
+				PRODUCT_NAME = Casio;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -337,7 +337,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.alexisloiselle.casio";
-				PRODUCT_NAME = casio;
+				PRODUCT_NAME = Casio;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				TARGETED_DEVICE_FAMILY = "1,2";

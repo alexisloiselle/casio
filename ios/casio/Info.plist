@@ -63,5 +63,7 @@
     <true/>
     <key>CFBundleDisplayName</key>
     <string>casio</string>
-  </dict>
+    <key>UIStatusBarStyle</key>
+  <string>UIStatusBarStyleLightContent</string>
+</dict>
 </plist>
